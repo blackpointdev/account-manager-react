@@ -7,39 +7,42 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            paginatedOperations: []
+            paginableOperations: [],
+            areOperationsLoaded: false
         }
     }
 
     componentDidMount() {
-        axios.get("http://localhost:8080/api/operations").then((response) => {
-            this.setState({
-                paginatedOperations: response.data
+        fetch("http://localhost:8080/api/operations")
+            .then((response) => {
+                return response.json()
             })
-        });
-
-        // fetch("http://localhost:8080/api/operations")
-        //     .then(response => response.json())
-        //     .then(response => {
-        //         this.state.paginatedOperations = response;
-        //     })
+            .then(data => {
+                this.setState({
+                    paginableOperations: data,
+                    areOperationsLoaded: true
+                })
+            })
     };
 
     render() {
-        let operations = this.state.paginatedOperations.map((paginableContent) => {
-            return (
-                <tr key={operation.id}>
-                    <td>{operation.id}</td>
-                    <td>{operation.name}</td>
-                    <td>TODO</td>
-                    <td>{operation.balance}</td>
-                    <td>
-                        <Button variant="outline-success" size="sm" className="mr-2">Edit</Button>
-                        <Button variant="outline-danger" size="sm">Delete</Button>
-                    </td>
-                </tr>
-            )
-        });
+        let operations = "Please, wait...";
+        if (this.state.areOperationsLoaded) {
+            operations = this.state.paginableOperations.content.map((operation) => {
+                return (
+                    <tr key={operation.id}>
+                        <td>{operation.id}</td>
+                        <td>{operation.name}</td>
+                        <td>TODO</td>
+                        <td>{operation.balance}</td>
+                        <td>
+                            <Button variant="outline-success" size="sm" className="mr-2">Edit</Button>
+                            <Button variant="outline-danger" size="sm">Delete</Button>
+                        </td>
+                    </tr>
+                )
+            });
+        }
         return (
             <div className="App container">
                 <Table>
