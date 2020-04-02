@@ -26,7 +26,7 @@ class Navigation extends Component{
 
     render() {
         return(
-            <Navbar bg="dark" variant="dark">
+            <Navbar id="navbar" variant="dark">
                 <Navbar.Brand href="#home">Account Manager</Navbar.Brand>
                 <Nav className="mr-auto">
                 <Nav.Link href="#home">Operations</Nav.Link>

@@ -7,3 +7,7 @@ body {
     margin-right: 0.5em;
     background-repeat: no-repeat;
 }
+
+#navbar {
+    background-color: rgb(26, 26, 59);
+}
