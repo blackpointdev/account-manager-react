@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Navigation from './Navbar/Navbar';
 
 class App extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class App extends Component {
     };
 
     render() {
-        let operations = "Please, wait...";
+        let operations = ["Please wait..."];
         if (this.state.areOperationsLoaded) {
             operations = this.state.paginableOperations.content.map((operation) => {
                 return (
@@ -44,21 +44,24 @@ class App extends Component {
             });
         }
         return (
-            <div className="App container">
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>User</th>
-                            <th>Balance</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {operations}
-                    </tbody>
-                </Table>
+            <div className="App">
+                <Navigation />
+                <div className="container">
+                    <Table hover >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>User</th>
+                                <th>Balance</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {operations}
+                        </tbody>
+                    </Table>
+                </div>
             </div>
         );
     }
