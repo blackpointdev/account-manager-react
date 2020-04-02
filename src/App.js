@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import Navigation from './Navbar/Navbar';
+import Navigation from './common/Navbar';
 
 class App extends Component {
     constructor(props) {
@@ -42,6 +42,9 @@ class App extends Component {
                     </tr>
                 )
             });
+            if(operations.length === 0) {
+                operations = "No available operations...";
+            }
         }
         return (
             <div className="App">

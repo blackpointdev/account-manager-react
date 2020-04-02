@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyBillAlt } from '@fortawesome/free-regular-svg-icons'
 
 import LoginAlert from './LoginAlert';
+import LoginForm from '../login/LoginForm';
 
 import './Navbar.css';
 
@@ -14,8 +15,12 @@ class Navigation extends Component{
     constructor(props) {
         super(props);
         this.state = {
-            showLoginAlert: false
+            showLoginAlert: false,
+            showLoginForm: false
         }
+
+        this.toggleLoginAlert = this.toggleLoginAlert.bind(this);
+        this.toggleLoginForm = this.toggleLoginForm.bind(this);
     }
 
     toggleLoginAlert() {
@@ -24,7 +29,15 @@ class Navigation extends Component{
         })
     }
 
+    toggleLoginForm() {
+        this.setState({
+            showLoginAlert: false,
+            showLoginForm: !this.state.showLoginForm
+        })
+    }
+
     render() {
+
         return(
             <Navbar id="navbar" variant="dark">
                 <Navbar.Brand href="#home">Account Manager</Navbar.Brand>
@@ -37,7 +50,8 @@ class Navigation extends Component{
                     <FontAwesomeIcon id="bill" icon={faMoneyBillAlt}/>
                     ADD OPERATION
                 </Button>
-                <LoginAlert show={this.state.showLoginAlert} onHide={() => this.toggleLoginAlert()} />
+                <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
+                <LoginForm show={this.state.showLoginForm} onHide={this.toggleLoginForm} />
             </Navbar>
 
         );
