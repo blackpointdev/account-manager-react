@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
+import { LinkContainer } from "react-router-bootstrap";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyBillAlt } from '@fortawesome/free-regular-svg-icons'
@@ -11,7 +13,7 @@ import LoginForm from '../login/LoginForm';
 
 import './Navbar.css';
 
-class Navigation extends Component{
+class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -38,19 +40,31 @@ class Navigation extends Component{
 
     render() {
 
-        return(
+        return (
             <Navbar collapseOnSelect expand="lg" id="navbar" variant="dark">
                 <Navbar.Brand href="#home">Account Manager</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#home">Operations</Nav.Link>
-                        <Nav.Link href="#features">Users</Nav.Link>
-                        <Nav.Link href="#pricing">API</Nav.Link>
+                        <LinkContainer to="/operations">
+                            <Nav.Link>
+                                Operations
+                            </Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/users">
+                            <Nav.Link>
+                                Users
+                            </Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/api">
+                            <Nav.Link>
+                                API
+                            </Nav.Link>
+                        </LinkContainer>
                     </Nav>
                     <Nav>
                         <Button variant="outline-info" onClick={() => this.toggleLoginAlert()}>
-                            <FontAwesomeIcon id="bill" icon={faMoneyBillAlt}/>
+                            <FontAwesomeIcon id="bill" icon={faMoneyBillAlt} />
                             ADD OPERATION
                         </Button>
                     </Nav>
