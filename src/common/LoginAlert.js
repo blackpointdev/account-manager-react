@@ -20,7 +20,7 @@ class LoginAlert extends Component{
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Button variant="light" className="button login-button" onClick={this.props.action}>LOGIN</Button>
+                    <Button variant="light" className="button" onClick={this.props.action}>LOGIN</Button>
                     <Button variant="outline-info" className="button register-button">CREATE ACCOUNT</Button>
                 </Modal.Body>
             </Modal>

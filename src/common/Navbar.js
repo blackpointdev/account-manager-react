@@ -39,17 +39,22 @@ class Navigation extends Component{
     render() {
 
         return(
-            <Navbar id="navbar" variant="dark">
+            <Navbar collapseOnSelect expand="lg" id="navbar" variant="dark">
                 <Navbar.Brand href="#home">Account Manager</Navbar.Brand>
-                <Nav className="mr-auto">
-                <Nav.Link href="#home">Operations</Nav.Link>
-                <Nav.Link href="#features">Users</Nav.Link>
-                <Nav.Link href="#pricing">API</Nav.Link>
-                </Nav>
-                <Button variant="outline-info" onClick={() => this.toggleLoginAlert()}>
-                    <FontAwesomeIcon id="bill" icon={faMoneyBillAlt}/>
-                    ADD OPERATION
-                </Button>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="mr-auto">
+                        <Nav.Link href="#home">Operations</Nav.Link>
+                        <Nav.Link href="#features">Users</Nav.Link>
+                        <Nav.Link href="#pricing">API</Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <Button variant="outline-info" onClick={() => this.toggleLoginAlert()}>
+                            <FontAwesomeIcon id="bill" icon={faMoneyBillAlt}/>
+                            ADD OPERATION
+                        </Button>
+                    </Nav>
+                </Navbar.Collapse>
                 <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
                 <LoginForm show={this.state.showLoginForm} onHide={this.toggleLoginForm} />
             </Navbar>

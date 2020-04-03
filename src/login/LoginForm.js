@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
+
+import './LoginForm.css';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -24,7 +27,18 @@ class LoginForm extends Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                
+                    <Form>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Control type="email" placeholder="username" />
+                        </Form.Group>
+
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Control type="password" placeholder="•••••••" />
+                        </Form.Group>
+                        <Button variant="light" className="login-button" type="submit">
+                            LOGIN
+                        </Button>
+                    </Form>
                 </Modal.Body>
             </Modal>
         );

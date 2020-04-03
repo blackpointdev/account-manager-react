@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert'
+
 import Navigation from './common/Navbar';
+
+import './App.css'
 
 class App extends Component {
     constructor(props) {
@@ -43,7 +47,14 @@ class App extends Component {
                 )
             });
             if(operations.length === 0) {
-                operations = "No available operations...";
+                return (
+                    <div className="App">
+                        <Navigation />
+                        <div className="container">
+                            <Alert variant="danger" className="operations-alert">No operations found...</Alert>
+                        </div>
+                    </div>
+                );
             }
         }
         return (
