@@ -2,6 +2,8 @@ import React, {Component } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
+import { LinkContainer } from "react-router-bootstrap";
+
 import './LoginAlert.css'
 
 class LoginAlert extends Component{
@@ -20,7 +22,9 @@ class LoginAlert extends Component{
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Button variant="light" className="button" onClick={this.props.action}>LOGIN</Button>
+                    <LinkContainer to='/login'>
+                        <Button variant="light" className="button" onClick={this.props.onHide}>LOGIN</Button>
+                    </LinkContainer>
                     <Button variant="outline-info" className="button register-button">CREATE ACCOUNT</Button>
                 </Modal.Body>
             </Modal>

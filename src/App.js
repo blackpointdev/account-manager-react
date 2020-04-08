@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
 
 import Navigation from './common/Navbar';
 import OperationsList from './feed/OperationsList';
+import LoginPage from './login/LoginPage';
 
 import './App.css'
 
@@ -12,14 +14,16 @@ class App extends Component {
             <div className="App">
                 <Router>
                     <Navigation />
-                    <div className="container">
-
+                    <Container>
                         <Switch>
                             <Route path="/operations">
                                 <OperationsList />
                             </Route>
+                            <Route path="/login">
+                                <LoginPage />
+                            </Route>
                         </Switch>
-                </div>
+                    </Container>
                 </Router>
             </div>
         );

@@ -1,0 +1,13 @@
+.login-form {
+    margin-top: 1em;
+}
+
+.login-page-header {
+    margin-bottom: 0.5em;
+    line-height: 2em;
+    border-bottom: 1px solid rgb(182, 182, 182);
+    color: rgb(90, 90, 90);
+    font-weight: lighter;
+    letter-spacing: 0.2em;
+    font-size: 1.5em;
+}

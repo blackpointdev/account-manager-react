@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
@@ -42,7 +41,9 @@ class Navigation extends Component {
 
         return (
             <Navbar collapseOnSelect expand="lg" id="navbar" variant="dark">
-                <Navbar.Brand href="#home">Account Manager</Navbar.Brand>
+                <LinkContainer to="/operations">
+                    <Navbar.Brand href="#home">Account Manager</Navbar.Brand>
+                </LinkContainer>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
