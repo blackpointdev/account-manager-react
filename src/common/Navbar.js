@@ -8,7 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyBillAlt } from '@fortawesome/free-regular-svg-icons'
 
 import LoginAlert from './LoginAlert';
-import LoginForm from '../login/LoginForm';
+import LoginFormModal from '../login/LoginFormModal';
+import { authenticationService } from '../services/authentication.service'; 
 
 import './Navbar.css';
 
@@ -22,6 +23,7 @@ class Navigation extends Component {
 
         this.toggleLoginAlert = this.toggleLoginAlert.bind(this);
         this.toggleLoginForm = this.toggleLoginForm.bind(this);
+        this.logout = this.logout.bind(this);
     }
 
     toggleLoginAlert() {
@@ -37,8 +39,12 @@ class Navigation extends Component {
         })
     }
 
-    render() {
+    logout() {
+        authenticationService.logout();
+        // Location.reload(true);
+    }
 
+    render() {
         return (
             <Navbar collapseOnSelect expand="lg" id="navbar" variant="dark">
                 <LinkContainer to="/operations">
@@ -64,6 +70,14 @@ class Navigation extends Component {
                         </LinkContainer>
                     </Nav>
                     <Nav>
+                        {localStorage.getItem('currentUser') != null &&
+                            <LinkContainer onClick={this.logout} to="/login">
+                                <Nav.Link>
+                                    Logout
+                                </Nav.Link>
+                            </LinkContainer>
+                        }
+
                         <Button variant="outline-info" onClick={() => this.toggleLoginAlert()}>
                             <FontAwesomeIcon id="bill" icon={faMoneyBillAlt} />
                             ADD OPERATION
@@ -71,7 +85,7 @@ class Navigation extends Component {
                     </Nav>
                 </Navbar.Collapse>
                 <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
-                <LoginForm show={this.state.showLoginForm} onHide={this.toggleLoginForm} />
+                <LoginFormModal show={this.state.showLoginForm} onHide={this.toggleLoginForm} />
             </Navbar>
 
         );

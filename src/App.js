@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Navigation from './common/Navbar';
 import OperationsList from './feed/OperationsList';
 import LoginPage from './login/LoginPage';
+import PrivateRoute from './helpers/PrivateRoute';
 
 import './App.css'
 
@@ -16,12 +17,8 @@ class App extends Component {
                     <Navigation />
                     <Container>
                         <Switch>
-                            <Route path="/operations">
-                                <OperationsList />
-                            </Route>
-                            <Route path="/login">
-                                <LoginPage />
-                            </Route>
+                            <PrivateRoute path="/operations" component={OperationsList} />
+                            <Route path="/login" component={LoginPage} />
                         </Switch>
                     </Container>
                 </Router>

@@ -3,9 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button';
 
-import './LoginForm.css';
+import './LoginFormModal.css';
 
-class LoginForm extends Component {
+class LoginFormModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -45,4 +45,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default LoginFormModal;
