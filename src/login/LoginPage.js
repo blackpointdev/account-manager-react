@@ -11,12 +11,6 @@ import { Redirect } from 'react-router-dom';
 class LoginPage extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            username: '',
-            password: '',
-            loggedIn: false,
-            jwt: ''
-        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,11 +20,8 @@ class LoginPage extends Component {
         event.preventDefault();
         authenticationService.login(this.state.username, this.state.password)
             .then(user => {
-                if(user.jwt) {
-                    this.setState({
-                        loggedIn: true,
-                        jwt: user.jwt
-                    });
+                if(user.jwt != null) {
+                    this.props.changeLoginState(true, {username: this.state.username, jwt: user.jwt});
                 }
             });
     }
@@ -52,11 +43,11 @@ class LoginPage extends Component {
                     <h2 className="login-page-header">LOGIN</h2>
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Control placeholder="username" name="username" onChange={this.handleInputChange} />
+                            <Form.Control placeholder="username" required name="username" onChange={this.handleInputChange} />
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Control type="password" placeholder="•••••••" name="password" onChange={this.handleInputChange}/>
+                            <Form.Control type="password" placeholder="•••••••" required name="password" onChange={this.handleInputChange}/>
                         </Form.Group>
                         <Button variant="outline-info" className="login-button" type="submit">
                             LOGIN

@@ -41,7 +41,7 @@ class Navigation extends Component {
 
     logout() {
         authenticationService.logout();
-        // Location.reload(true);
+        this.props.setLoggedInUser(false);
     }
 
     render() {

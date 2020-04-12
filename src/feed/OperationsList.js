@@ -15,7 +15,10 @@ class OperationsList extends Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/api/operations")
+        const header = { Authorization: `Bearer ${this.props.loggedInUser.jwt}` };
+        const requestOptions = {method: 'GET', headers: header};
+        console.log(header);
+        fetch("http://localhost:8080/api/operations", requestOptions)
             .then((response) => {
                 return response.json()
             })

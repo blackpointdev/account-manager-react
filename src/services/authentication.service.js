@@ -16,18 +16,17 @@ function login(username, password) {
                     return response.json()
                 }
                 else if([401, 403].indexOf(response.status)) {
-                    alert("Incorrect login or password.")
-                    logout();
+                    alert("Incorrect login or password.");
+                    window.location.reload(true);
                 }
             })
             .then(user => {
-                localStorage.setItem("currentUser", user.jwt);
+                window.localStorage.setItem("currentUser", user.jwt);
                 return user;
             })
 }
 
 function logout() {
-    // localStorage.removeItem("currentUser");
-    localStorage.clear();
-    Location.reload(true);
+    //window.localStorage.removeItem("currentUser");
+   window.localStorage.clear();
 }

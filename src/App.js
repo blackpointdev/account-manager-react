@@ -10,6 +10,27 @@ import PrivateRoute from './helpers/PrivateRoute';
 import './App.css'
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isUserLoggedIn: false,
+            currentUser: {
+                jwt: '',
+                username: ''
+            }
+        }
+
+        this.setLoggedInUser = this.setLoggedInUser.bind(this);
+
+    }
+
+    setLoggedInUser(loggedIn, loggedUser = null) {
+        this.setState({
+            isUserLoggedIn: loggedIn,
+            currentUser: loggedUser
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -17,8 +38,8 @@ class App extends Component {
                     <Navigation />
                     <Container>
                         <Switch>
-                            <PrivateRoute path="/operations" component={OperationsList} />
-                            <Route path="/login" component={LoginPage} />
+                            <PrivateRoute path="/operations" component={() => <OperationsList loggedInUser={this.state.currentUser} />} />
+                            <Route path="/login" component={() => <LoginPage changeLoginState={this.setLoggedInUser} />}  />
                         </Switch>
                     </Container>
                 </Router>
