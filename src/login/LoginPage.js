@@ -21,7 +21,7 @@ class LoginPage extends Component {
         authenticationService.login(this.state.username, this.state.password)
             .then(user => {
                 if(user.jwt != null) {
-                    this.props.changeLoginState(true, {username: this.state.username, jwt: user.jwt});
+                    this.props.changeLoginState(true, { jwt: user.jwt, username: this.state.username });
                 }
             });
     }
@@ -34,7 +34,7 @@ class LoginPage extends Component {
     }
 
     render() {
-        if(localStorage.getItem("currentUser")) {
+        if(localStorage.getItem("userJwt")) {
             return <Redirect to ="/operations" />;
         }
         return (

@@ -8,7 +8,7 @@ class PrivateRoute extends Component {
             <Route
                 {...props}
                 render={props => (
-                   window.localStorage.getItem("currentUser") ?
+                   window.localStorage.getItem("userJwt") ?
                         <Component {...props} /> :
                         <Redirect to='/login' />
                 )}

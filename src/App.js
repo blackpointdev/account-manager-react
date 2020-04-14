@@ -14,11 +14,8 @@ class App extends Component {
         super(props);
         this.state = {
             isUserLoggedIn: false,
-            currentUser: {
-                jwt: '',
-                username: ''
-            }
-        }
+            currentUser: null
+        };
 
         this.setLoggedInUser = this.setLoggedInUser.bind(this);
 
@@ -31,11 +28,22 @@ class App extends Component {
         });
     }
 
+    componentDidMount() {
+        if (window.localStorage.getItem("userJwt") != null) {
+            this.setLoggedInUser(
+                true, 
+                { 
+                    jwt: window.localStorage.getItem("userJwt"), 
+                    username: window.localStorage.getItem("userUsername") 
+                });
+        }
+    }
+
     render() {
         return (
             <div className="App">
                 <Router>
-                    <Navigation />
+                    <Navigation loggedIn={this.state.currentUser} changeLoginState={this.setLoggedInUser}/>
                     <Container>
                         <Switch>
                             <PrivateRoute path="/operations" component={() => <OperationsList loggedInUser={this.state.currentUser} />} />

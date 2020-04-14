@@ -21,12 +21,12 @@ function login(username, password) {
                 }
             })
             .then(user => {
-                window.localStorage.setItem("currentUser", user.jwt);
+                window.localStorage.setItem("userJwt", user.jwt);
+                window.localStorage.setItem("userUsername", username);
                 return user;
             })
 }
 
 function logout() {
-    //window.localStorage.removeItem("currentUser");
-   window.localStorage.clear();
+    window.localStorage.clear();
 }

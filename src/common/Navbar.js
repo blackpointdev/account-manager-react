@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyBillAlt } from '@fortawesome/free-regular-svg-icons'
 
 import LoginAlert from './LoginAlert';
-import LoginFormModal from '../login/LoginFormModal';
 import { authenticationService } from '../services/authentication.service'; 
 
 import './Navbar.css';
@@ -41,7 +40,7 @@ class Navigation extends Component {
 
     logout() {
         authenticationService.logout();
-        this.props.setLoggedInUser(false);
+        this.props.changeLoginState(false);
     }
 
     render() {
@@ -70,7 +69,7 @@ class Navigation extends Component {
                         </LinkContainer>
                     </Nav>
                     <Nav>
-                        {localStorage.getItem('currentUser') != null &&
+                        {this.props.loggedIn != null &&
                             <LinkContainer onClick={this.logout} to="/login">
                                 <Nav.Link>
                                     Logout
@@ -84,8 +83,11 @@ class Navigation extends Component {
                         </Button>
                     </Nav>
                 </Navbar.Collapse>
-                <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
-                <LoginFormModal show={this.state.showLoginForm} onHide={this.toggleLoginForm} />
+                {this.props.loggedIn ? (
+                    <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
+                ) : (
+                    <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
+                )}
             </Navbar>
 
         );
