@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyBillAlt } from '@fortawesome/free-regular-svg-icons'
 
 import LoginAlert from './LoginAlert';
+import AddOperationModal from '../operations/AddOperationModal';
 import { authenticationService } from '../services/authentication.service'; 
 
 import './Navbar.css';
@@ -84,7 +85,7 @@ class Navigation extends Component {
                     </Nav>
                 </Navbar.Collapse>
                 {this.props.loggedIn ? (
-                    <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
+                    <AddOperationModal show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
                 ) : (
                     <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
                 )}
