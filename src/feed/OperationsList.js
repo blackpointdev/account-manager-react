@@ -39,7 +39,7 @@ class OperationsList extends Component {
                     <tr key={operation.id}>
                         <td>{operation.id}</td>
                         <td>{operation.name}</td>
-                        <td>TODO</td>
+                        <td>{operation.username}</td>
                         <td>{operation.balance}</td>
                         <td>
                             <Button variant="outline-success" size="sm" className="mr-2">Edit</Button>

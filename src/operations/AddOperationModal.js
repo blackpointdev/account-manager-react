@@ -21,11 +21,11 @@ class AddOperationModal extends Component {
         event.preventDefault();
         let operation = {
             user: this.state.user,
-            amount: this.state.amount,
-            title: this.state.title
+            balance: this.state.balance,
+            name: this.state.title
         };
 
-        operationsService.addOperation(operation);
+        operationsService.addOperation(operation, this.props.user);
     }
 
     handleInputChange(event) {
@@ -56,7 +56,7 @@ class AddOperationModal extends Component {
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formGridPassword">
-                                <Form.Control name="amount" onChange={this.handleInputChange} type="text" required placeholder="Amount" />
+                                <Form.Control name="balance" onChange={this.handleInputChange} type="text" required placeholder="Amount" />
                             </Form.Group>
                         </Form.Row>
                         <Form.Row>
