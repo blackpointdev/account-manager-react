@@ -19,13 +19,19 @@ class AddOperationModal extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        if (this.state.username === "Select..." || this.state.username == null) {
+            alert("Please select user.");
+            return;
+        }
+
         let operation = {
-            user: this.state.user,
+            username: this.state.username,
             balance: this.state.balance,
             name: this.state.title
         };
 
         operationsService.addOperation(operation, this.props.user);
+        this.props.onHide();
     }
 
     handleInputChange(event) {
@@ -50,8 +56,9 @@ class AddOperationModal extends Component {
                     <Form onSubmit={this.handleSubmit}>
                         <Form.Row>
                             <Form.Group as={Col} controlId="exampleForm.SelectCustom">
-                                <Form.Control required as="select" name="user" onChange={this.handleInputChange}>
-                                    <option>User 1</option>
+                                <Form.Control required as="select" name="username" onChange={this.handleInputChange}>
+                                    <option>Select...</option>
+                                    <option>blackpoint</option>
                                     <option>User 2</option>
                                 </Form.Control>
                             </Form.Group>

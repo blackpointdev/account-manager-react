@@ -40,7 +40,7 @@ class OperationsList extends Component {
                         <td>{operation.id}</td>
                         <td>{operation.name}</td>
                         <td>{operation.username}</td>
-                        <td>{operation.balance}</td>
+                        <td><b>{operation.balance}</b></td>
                         <td>
                             <Button variant="outline-success" size="sm" className="mr-2">Edit</Button>
                             <Button variant="outline-danger" size="sm">Delete</Button>
@@ -64,7 +64,7 @@ class OperationsList extends Component {
                             <th>#</th>
                             <th>Name</th>
                             <th>User</th>
-                            <th>Balance</th>
+                            <th>Balance (PLN)</th>
                             <th>Action</th>
                         </tr>
                     </thead>
