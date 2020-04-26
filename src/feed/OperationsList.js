@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+
+import { operationsService } from '../services/operations.service'
 
 import './OperationsList.css'
 
@@ -12,24 +14,30 @@ class OperationsList extends Component {
             paginableOperations: [],
             areOperationsLoaded: false
         }
+
+        this.deleteOperation = this.deleteOperation.bind(this);
+        this.updateOperations = this.updateOperations.bind(this);
     }
 
     componentDidMount() {
-        if (this.props.loggedInUser != null) {
-        const header = { Authorization: `Bearer ${this.props.loggedInUser.jwt}` };
-        const requestOptions = {method: 'GET', headers: header};
-        fetch("http://localhost:8080/api/operations", requestOptions)
-            .then((response) => {
-                return response.json()
-            })
-            .then(data => {
-                this.setState({
-                    paginableOperations: data,
-                    areOperationsLoaded: true
-                })
-            })
-        }
-    };
+        this.updateOperations(this.props.loggedInUser);    
+    }
+
+    
+    updateOperations(user) {
+        const data = operationsService.retriveOperations(user);
+
+        data.then((operations) => {
+            this.setState({
+                paginableOperations: operations,
+                areOperationsLoaded: true
+            });
+        });  
+    }
+
+    deleteOperation(operationId) {
+        operationsService.deleteOperation(operationId, this.props.loggedInUser);
+    }
 
     render() {
         let operations = ["Please wait..."];
@@ -43,7 +51,7 @@ class OperationsList extends Component {
                         <td><b>{operation.balance}</b></td>
                         <td>
                             <Button variant="outline-success" size="sm" className="mr-2">Edit</Button>
-                            <Button variant="outline-danger" size="sm">Delete</Button>
+                            <Button variant="outline-danger" size="sm" onClick={() => { this.deleteOperation(operation.id); } }>Delete</Button>
                         </td>
                     </tr>
                 )
