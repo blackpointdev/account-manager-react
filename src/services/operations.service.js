@@ -39,7 +39,9 @@ async function deleteOperation(id, user) {
         const response = await fetch(`http://localhost:8080/api/operations/${id}`, requestOptions);
         if (!response.ok) {
             alert("Could not delete operation. Please try again later.");
+            return;
         }
+        return response;
     }
 }
 

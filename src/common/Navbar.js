@@ -85,7 +85,7 @@ class Navigation extends Component {
                     </Nav>
                 </Navbar.Collapse>
                 {this.props.loggedIn ? (
-                    <AddOperationModal show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} user={this.props.loggedIn} />
+                    <AddOperationModal show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} user={this.props.loggedIn} updateOperations={this.props.updateOperations} />
                 ) : (
                     <LoginAlert show={this.state.showLoginAlert} onHide={this.toggleLoginAlert} action={this.toggleLoginForm} />
                 )}

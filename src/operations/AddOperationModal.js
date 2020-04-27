@@ -30,7 +30,8 @@ class AddOperationModal extends Component {
             name: this.state.title
         };
 
-        operationsService.addOperation(operation, this.props.user);
+        const result = operationsService.addOperation(operation, this.props.user);
+        result.then(() => { this.props.updateOperations(); });
         this.props.onHide();
     }
 

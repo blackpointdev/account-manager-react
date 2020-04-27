@@ -25,6 +25,10 @@ class OperationsList extends Component {
 
     
     updateOperations(user) {
+        this.setState({
+            areOperationsLoaded: false
+        });
+        
         const data = operationsService.retriveOperations(user);
 
         data.then((operations) => {
@@ -36,7 +40,9 @@ class OperationsList extends Component {
     }
 
     deleteOperation(operationId) {
-        operationsService.deleteOperation(operationId, this.props.loggedInUser);
+        const response = operationsService.deleteOperation(operationId, this.props.loggedInUser);
+
+        response.then(() => { this.updateOperations(this.props.loggedInUser); });
     }
 
     render() {
@@ -48,7 +54,7 @@ class OperationsList extends Component {
                         <td>{operation.id}</td>
                         <td>{operation.name}</td>
                         <td>{operation.username}</td>
-                        <td><b>{operation.balance}</b></td>
+                        <td>{operation.balance.toFixed(2)}</td>
                         <td>
                             <Button variant="outline-success" size="sm" className="mr-2">Edit</Button>
                             <Button variant="outline-danger" size="sm" onClick={() => { this.deleteOperation(operation.id); } }>Delete</Button>

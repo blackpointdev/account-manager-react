@@ -18,7 +18,11 @@ class App extends Component {
         };
 
         this.setLoggedInUser = this.setLoggedInUser.bind(this);
+        this.updateOperationsList = this.updateOperationsList.bind(this);
+    }
 
+    updateOperationsList() {
+        this.operations.updateOperations(this.state.currentUser);
     }
 
     setLoggedInUser(loggedIn, loggedUser = null) {
@@ -43,10 +47,10 @@ class App extends Component {
         return (
             <div className="App">
                 <Router>
-                    <Navigation loggedIn={this.state.currentUser} changeLoginState={this.setLoggedInUser}/>
+                    <Navigation loggedIn={this.state.currentUser} changeLoginState={this.setLoggedInUser} updateOperations={this.updateOperationsList}/>
                     <Container>
                         <Switch>
-                            <PrivateRoute path="/operations" component={() => <OperationsList loggedInUser={this.state.currentUser} />} />
+                            <PrivateRoute path="/operations" component={() => <OperationsList ref={operations => this.operations = operations} loggedInUser={this.state.currentUser} />} />
                             <Route path="/login" component={() => <LoginPage changeLoginState={this.setLoggedInUser} />}  />
                         </Switch>
                     </Container>
