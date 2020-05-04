@@ -6,15 +6,38 @@ import Form from 'react-bootstrap/Form';
 import Col from 'react-bootstrap/Col';
 
 import { operationsService } from '../services/operations.service';
+import { usersService } from '../services/users.service';
 
 import './AddOperationModal.css';
 
 class AddOperationModal extends Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
-
+        this.state = {
+            usersList: null
+        };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.getUsersList = this.getUsersList.bind(this);
+    }
+
+    componentDidMount() {
+        this._isMounted = true;
+        this.getUsersList();
+    }
+
+    getUsersList() {
+        const data = usersService.getUsers(this.props.user);
+
+        data.then((users) => {
+            if (this._isMounted) {
+                this.setState({
+                    usersList: users
+                });
+            }
+        });
     }
 
     handleSubmit(event) {
@@ -43,6 +66,19 @@ class AddOperationModal extends Component {
     }
 
     render() {
+        let users = ["Please wait..."];
+
+        if (this.state.usersList != null) {
+            users = this.state.usersList.map((user) => {
+                return(
+                    <option>{user.username}</option>
+                );
+            });
+
+            if (users.length === 0) {
+                users = "No users found."
+            }
+        }
         return (
             <Modal
                 show={this.props.show}
@@ -59,8 +95,7 @@ class AddOperationModal extends Component {
                             <Form.Group as={Col} controlId="exampleForm.SelectCustom">
                                 <Form.Control required as="select" name="username" onChange={this.handleInputChange}>
                                     <option>Select...</option>
-                                    <option>blackpoint</option>
-                                    <option>User 2</option>
+                                    {users}
                                 </Form.Control>
                             </Form.Group>
                             <Form.Group as={Col} controlId="formGridPassword">

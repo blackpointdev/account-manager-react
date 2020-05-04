@@ -73,7 +73,7 @@ class Navigation extends Component {
                         {this.props.loggedIn != null &&
                             <LinkContainer onClick={this.logout} to="/login">
                                 <Nav.Link>
-                                    Logout
+                                    <div className="logout-btn">Welcome, <b>{this.props.loggedIn.username}</b></div>
                                 </Nav.Link>
                             </LinkContainer>
                         }

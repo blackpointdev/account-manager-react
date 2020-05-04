@@ -6,3 +6,7 @@
 #navbar {
     background-color: rgb(26, 26, 59);
 }
+
+.logout-btn {
+    margin-right: 1em;
+}
