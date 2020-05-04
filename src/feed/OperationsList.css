@@ -1,3 +1,19 @@
 .operations-alert {
     margin-top: 0.5em;
 }
+
+.total-data {
+    background-color: rgb(241, 241, 241);
+    height: 4em;
+    align-content: center;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    border: solid 0.5px #5bc0de;
+    border-radius: 4px;
+}
+
+.balance-value {
+    font-weight: lighter;
+    margin-left: 1em;
+    font-size: 2em;
+}

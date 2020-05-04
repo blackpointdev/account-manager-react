@@ -23,6 +23,7 @@ class App extends Component {
 
     updateOperationsList() {
         this.operations.updateOperations(this.state.currentUser);
+        this.operations.getBalance(this.state.currentUser);
     }
 
     setLoggedInUser(loggedIn, loggedUser = null) {
