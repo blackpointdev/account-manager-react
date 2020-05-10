@@ -12,15 +12,26 @@ async function retriveOperations(user) {
     }
 }
 
-async function getBalance(user) {
+async function getBalance(user, username) {
     if (user != null) {
         const header = { Authorization: `Bearer ${user.jwt}` };
         const requestOptions = {method: 'GET', headers: header};
 
-        let operations = await fetch("http://localhost:8080/api/operations/balance", requestOptions)
-        .then((response) => {
-            return response.json();
-        })
+        let operations;
+
+        if(username == null) {
+            operations = await fetch("http://localhost:8080/api/operations/balance", requestOptions)
+            .then((response) => {
+                return response.json();
+            });
+        }
+        else {
+            operations = await fetch(`http://localhost:8080/api/operations/balance/${username}`, requestOptions)
+            .then((response) => {
+                return response.json();
+            });
+        }
+
 
         return operations;
     }

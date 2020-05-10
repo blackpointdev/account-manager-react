@@ -16,6 +16,7 @@ class OperationsList extends Component {
             paginableOperations: [],
             areOperationsLoaded: false,
             balance: 0,
+            usersBalance: [],
             numberOfOperations: 0
         }
 
@@ -28,7 +29,6 @@ class OperationsList extends Component {
         this._isMounted = true;
         
         this.updateOperations(this.props.loggedInUser);
-        this.getBalance(this.props.loggedInUser);
     }
 
     componentWillUnmount() {
@@ -51,19 +51,37 @@ class OperationsList extends Component {
                 });
             }
         });  
+
+        this.getBalance(this.props.loggedInUser);
+        this.getBalance(this.props.loggedInUser, "blackpoint");
+        this.getBalance(this.props.loggedInUser, "rodzice");
     }
 
-    getBalance(user) {
-        const data = operationsService.getBalance(user);
+    getBalance(user, username = null) {
+        const data = operationsService.getBalance(user, username) 
 
-        data.then((balanceInput) => {
-            if(this._isMounted) {
-                this.setState({
-                    balance: balanceInput.balance,
-                    numberOfOperations: balanceInput.numberOfOperations
-                })
-            }
-        });
+        if (username === null) {
+            data.then((balanceInput) => {
+                if(this._isMounted) {
+                    this.setState({
+                        balance: balanceInput.balance,
+                        numberOfOperations: balanceInput.numberOfOperations
+                    })
+                }
+            });
+        }
+        else {
+            data.then((balanceInput) => {
+                if(this._isMounted) {
+                    this.setState(state => {
+                        const usersBalance = state.usersBalance.concat(balanceInput);
+                        return {
+                            usersBalance
+                        };
+                    });
+                };
+            });
+        }
     }
 
     deleteOperation(operationId) {
@@ -71,12 +89,15 @@ class OperationsList extends Component {
 
         response.then(() => { 
             this.updateOperations(this.props.loggedInUser);
-            this.getBalance(this.props.loggedInUser) 
+            this.getBalance(this.props.loggedInUser);
+            this.getBalance(this.props.loggedInUser, "blackpoint");
+            this.getBalance(this.props.loggedInUser, "rodzice");
         });
     }
 
     render() {
         let operations = ["Please wait..."];
+        let usersBalance = ["Please wait..."];
         if (this.state.areOperationsLoaded) {
             operations = this.state.paginableOperations.content.map((operation) => {
                 return (
@@ -99,12 +120,35 @@ class OperationsList extends Component {
                     </div>
                 );
             }
+
+            usersBalance = this.state.usersBalance.map((userBalance) => {
+                return (
+                    <div className="row">
+                        <div className="col">
+                            {userBalance.balance}
+                        </div>
+                        <div className="col">
+                            {userBalance.numberOfOperations}
+                        </div>
+                    </div>
+                )
+            })
         }
+
         return (
             <div className="operations-list">
-                <div className="total-data row">
-                    <div className="col">Total operations: <span className="balance-value">{this.state.numberOfOperations}</span></div>
-                    <div className="col">Total balance: <span className="balance-value">{this.state.balance.toFixed(2)} PLN</span></div>
+                <div className="total-data">
+                    <div className="row">
+                        <div className="col">
+                            <span className="balance-label">Total operations:</span>
+                            <span className="balance-value">{this.state.numberOfOperations}</span>
+                        </div>
+                        <div className="col">
+                            <label className="balance-label">Total balance:</label>
+                            <span className="balance-value">{this.state.balance.toFixed(2)} PLN</span>
+                        </div>
+                    </div>
+                    {usersBalance}
                 </div>
                 <Table hover >
                     <thead>

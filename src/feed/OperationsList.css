@@ -4,16 +4,29 @@
 
 .total-data {
     background-color: rgb(241, 241, 241);
-    height: 4em;
-    align-content: center;
+    padding: 0.5em;
     margin-bottom: 1em;
     margin-top: 1em;
     border: solid 0.5px #5bc0de;
     border-radius: 4px;
 }
 
+.balance-label {
+    line-height: inherit;
+    vertical-align: middle;
+    margin-bottom: 0px;
+}
+
 .balance-value {
     font-weight: lighter;
     margin-left: 1em;
     font-size: 2em;
+    line-height: inherit;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 600px) {
+    .balance-value {
+        font-size: 1.5em;
+    }
 }
